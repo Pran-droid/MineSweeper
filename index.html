@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper - Single & Multiplayer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>💣 Minesweeper</h1>
+        
+        <!-- Mode Selection Screen -->
+        <div class="mode-selection" id="mode-selection">
+            <div class="mode-buttons">
+                <div class="mode-card" onclick="game.selectMode('single')">
+                    <div class="mode-icon">🎯</div>
+                    <h3>Single Player</h3>
+                    <p>Classic Minesweeper experience with timer and high scores</p>
+                </div>
+                <div class="mode-card" onclick="game.selectMode('multi')">
+                    <div class="mode-icon">👥</div>
+                    <h3>Multiplayer</h3>
+                    <p>Competitive turn-based gameplay with friends</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Setup Screen -->
+        <div class="setup-screen" id="setup-screen">
+            <button class="back-btn" id="back-to-modes">← Back to Mode Selection</button>
+            
+            <div class="difficulty-buttons" id="setup-difficulty">
+                <button class="difficulty-btn active" data-difficulty="easy">Easy (9×9, 10 mines)</button>
+                <button class="difficulty-btn" data-difficulty="medium">Medium (16×16, 40 mines)</button>
+                <button class="difficulty-btn" data-difficulty="hard">Hard (16×30, 99 mines)</button>
+            </div>
+
+            <!-- Single Player Setup -->
+            <div id="single-player-setup" style="display: none;">
+                <div class="player-setup">
+                    <h3>🎯 Single Player Mode</h3>
+                    <p>Try to clear the minefield as quickly as possible!</p>
+                </div>
+                <button class="start-game-btn" id="start-single-game">Start Game</button>
+            </div>
+
+            <!-- Multiplayer Setup -->
+            <div id="multiplayer-setup" style="display: none;">
+                <div class="player-setup">
+                    <h3>👥 Add Players</h3>
+                    <div id="players-list"></div>
+                    <div class="player-input">
+                        <input type="text" id="player-name-input" placeholder="Enter player name" maxlength="15">
+                        <input type="color" id="player-color-input" class="color-picker" value="#3498db">
+                        <button class="add-player-btn" id="add-player-btn">Add Player</button>
+                    </div>
+                    <button class="start-game-btn" id="start-multi-game" disabled>Start Game (Need 2+ players)</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div class="game-screen" id="game-screen">
+            <!-- Single Player Info -->
+            <div id="single-player-info" style="display: none;">
+                <div class="single-player-info" id="single-status">Ready to Play!</div>
+                <div class="single-player-stats">
+                    <div class="stat-card">
+                        <div class="stat-value" id="sp-time">000</div>
+                        <div class="stat-label">Time</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="sp-flags">0</div>
+                        <div class="stat-label">Flags Used</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="sp-remaining">0</div>
+                        <div class="stat-label">Mines Left</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Multiplayer Info -->
+            <div id="multiplayer-info" style="display: none;">
+                <div class="players-info" id="players-info"></div>
+                <div class="current-turn" id="current-turn"></div>
+            </div>
+
+            <div class="controls-help">
+                <strong>Controls:</strong> Left-click to reveal • Right-click to flag/unflag • 
+                <span id="mode-specific-help">Clear all safe cells to win!</span>
+            </div>
+
+            <div class="game-info">
+                <div class="info-item" id="round-info" style="display: none;">
+                    <div class="info-label">Round</div>
+                    <div class="info-value" id="round-number">1</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Mines</div>
+                    <div class="info-value" id="mine-count">10</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Cells Left</div>
+                    <div class="info-value" id="cells-left">71</div>
+                </div>
+            </div>
+
+            <div class="game-board" id="game-board"></div>
+            
+            <div class="game-status" id="game-status"></div>
+            
+            <div id="game-buttons">
+                <button class="new-game-btn" id="new-game-btn">New Game</button>
+                <button class="new-round-btn" id="new-round-btn" style="display: none;">New Round</button>
+                <button class="reset-btn" id="reset-btn">Back to Setup</button>
+            </div>
+
+            <div class="leaderboard" id="leaderboard" style="display: none;">
+                <h3>🏆 Leaderboard</h3>
+                <div id="leaderboard-list"></div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
