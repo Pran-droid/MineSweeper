@@ -1,6 +1,7 @@
 # 💣 Minesweeper
 
 Modern Minesweeper game with single-player and multiplayer modes.
+Enjoy - https://marvelous-conkies-400930.netlify.app/
 
 ## Features
 
